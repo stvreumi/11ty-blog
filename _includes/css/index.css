@@ -374,7 +374,7 @@ header {
 .layout-with-toc main {
 	flex: 1;
 	min-width: 0;
-	max-width: 40em;
+	max-width: 60em;
 }
 
 /* Responsive design */

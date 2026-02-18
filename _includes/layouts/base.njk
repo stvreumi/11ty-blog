@@ -6,6 +6,21 @@
 		<title>{{ title or metadata.title }}</title>
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+		<link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
+
+		<meta property="og:title" content="{{ title or metadata.title }}">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
+		<meta property="og:description" content="{{ description or metadata.description }}">
+		<meta property="og:image" content="{{ metadata.url }}img/og-image.png">
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="{{ metadata.author.name }}">
+		<meta name="twitter:title" content="{{ title or metadata.title }}">
+		<meta name="twitter:description" content="{{ description or metadata.description }}">
+		<meta name="twitter:image" content="{{ metadata.url }}img/og-image.png">
+
+		<link rel="manifest" href="/manifest.json">
 
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
 		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
@@ -25,13 +40,13 @@
 		<style>/* This is an arbitrary CSS string added to the bundle */</style>
 
 		{#- Add the contents of a file to the bundle #}
-		<style>{% include "css/index.css" %}</style>
+		<style eleventy:ignore>{% include "css/index.css" %}</style>
 
 		{#- Or you can add from node_modules #}
 		{# <style>{% include "node_modules/something.css" %}</style> #}
 
 		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
-		<style>{% getBundle "css" %}</style>
+		<style eleventy:ignore>{% getBundle "css" %}</style>
 
 		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
 		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}

@@ -1,20 +1,17 @@
 import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
-// import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import { minify } from "html-minifier-terser";
 
 import pluginFilters from "./_config/filters.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
-export default async function(eleventyConfig) {
+export default async function (eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
-		if (data.draft) {
-			data.title = `${data.title} (draft)`;
-		}
-
-		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+		if (data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
 			return false;
 		}
 	});
@@ -31,7 +28,8 @@ export default async function(eleventyConfig) {
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Watch CSS files
-	eleventyConfig.addWatchTarget("css/**/*.css");
+	eleventyConfig.addWatchTarget("content/**/*.css");
+	eleventyConfig.addWatchTarget("_includes/**/*.css");
 	// Watch images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
 
@@ -60,37 +58,37 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
 
-	// eleventyConfig.addPlugin(feedPlugin, {
-	// 	type: "atom", // or "rss", "json"
-	// 	outputPath: "/feed/feed.xml",
-	// 	stylesheet: "pretty-atom-feed.xsl",
-	// 	templateData: {
-	// 		eleventyNavigation: {
-	// 			key: "Feed",
-	// 			order: 4
-	// 		}
-	// 	},
-	// 	collection: {
-	// 		name: "posts",
-	// 		limit: 10,
-	// 	},
-	// 	metadata: {
-	// 		language: "en",
-	// 		title: "Blog Title",
-	// 		subtitle: "This is a longer description about your blog.",
-	// 		base: "https://example.com/",
-	// 		author: {
-	// 			name: "Your Name"
-	// 		}
-	// 	}
-	// });
+	eleventyConfig.addPlugin(feedPlugin, {
+		type: "atom", // or "rss", "json"
+		outputPath: "/feed/feed.xml",
+		stylesheet: "pretty-atom-feed.xsl",
+		templateData: {
+			eleventyNavigation: {
+				key: "Feed",
+				order: 4
+			}
+		},
+		collection: {
+			name: "posts",
+			limit: 10,
+		},
+		metadata: {
+			language: "en",
+			title: "stvreumi",
+			subtitle: "A blog.",
+			base: "https://stvreumi.github.io/",
+			author: {
+				name: "Chung Chih-Chi"
+			}
+		}
+	});
 
-	eleventyConfig.addNunjucksFilter("regexSearch", function(str, regex, group = 0) {
+	eleventyConfig.addNunjucksFilter("regexSearch", function (str, regex, group = 0) {
 		const match = new RegExp(regex).exec(str);
 		return match ? match[group] : "";
 	});
-	eleventyConfig.addNunjucksFilter("split", function(str, separator) {
-		if(typeof str !== "string") return [];
+	eleventyConfig.addNunjucksFilter("split", function (str, separator) {
+		if (typeof str !== "string") return [];
 		return str.split(separator);
 	});
 
@@ -129,39 +127,53 @@ export default async function(eleventyConfig) {
 	});
 
 	// TOC Transform
-	eleventyConfig.addTransform("toc", function(content, outputPath) {
+	eleventyConfig.addTransform("toc", function (content, outputPath) {
 		if (outputPath && outputPath.endsWith(".html")) {
 			const headings = [];
 			const regex = /<h([23])[^>]*id="([^"]+)"[^>]*>([^<]+)<\/h[23]>/g;
 			let match;
-			
+
 			while ((match = regex.exec(content)) !== null) {
 				// Skip visually hidden headings and navigation headings
 				if (match[0].includes('class="visually-hidden"') || match[2] === 'top-level-navigation-menu') {
 					continue;
 				}
-				
+
 				headings.push({
 					level: parseInt(match[1]),
 					id: match[2],
 					text: match[3].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#x27;/g, "'")
 				});
 			}
-			
+
 			if (headings.length > 0) {
 				let tocHtml = '<nav class="toc"><strong>Table of Contents</strong><ul>';
 				for (const heading of headings) {
 					tocHtml += `<li class="toc-level-${heading.level}"><a href="#${heading.id}">${heading.text}</a></li>`;
 				}
 				tocHtml += '</ul></nav>';
-				
+
 				content = content.replace(
 					'<aside class="toc-sidebar">',
 					`<aside class="toc-sidebar">${tocHtml}`
 				);
 			}
 		}
-		
+
+		return content;
+	});
+
+	eleventyConfig.addTransform("htmlmin", async function (content, outputPath) {
+		if ((outputPath || "").endsWith(".html")) {
+			let minified = await minify(content, {
+				useShortDoctype: true,
+				removeComments: true,
+				collapseWhitespace: true,
+				minifyCSS: true,
+				minifyJS: true,
+			});
+			return minified;
+		}
 		return content;
 	});
 

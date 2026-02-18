@@ -1,5 +1,4 @@
 _site/
 node_modules/
 .cache
-.pnpm-store
-å
+.pnpm-store/
