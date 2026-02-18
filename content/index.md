@@ -1,7 +1,7 @@
 ---js
 const eleventyNavigation = {
-	key: "Resumes",
-	order: 4
+	key: "Home",
+	order: 1
 };
 ---
 # 鍾智吉 (Chih-Chi Chung)
@@ -14,7 +14,7 @@ const eleventyNavigation = {
 
 ## Summary
 
-Full-stack Developer & DevOps Engineer contributing to scalable application development and deployment automation. 
+I'm a full-stack developer & DevOps engineer contributing to scalable application development and deployment automation. 
 Experienced in modernizing legacy systems, building observability pipelines, and supporting cross-functional engineering workflows. 
 I am passionate about improving system reliability and developer experience, and always eager to learn and grow through practical challenges.
 
@@ -85,5 +85,5 @@ I am passionate about improving system reliability and developer experience, and
 
 ---
 
-_Last updated: July 2025_
+_Last updated: February 2026_
 
