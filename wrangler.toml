@@ -1,3 +1,0 @@
-name = "11ty-resume"
-pages_build_output_dir = "_site"
-command = "pnpm run build"
