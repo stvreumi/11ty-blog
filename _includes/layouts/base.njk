@@ -55,12 +55,16 @@
 				</ul>
 			</nav>
 		</header>
-
-		<main id="main">
-			<heading-anchors>
-				{{ content | safe }}
-			</heading-anchors>
-		</main>
+		
+		<div class="layout-with-toc">
+            <aside class="toc-sidebar">
+            </aside>
+            <main id="main">
+                <heading-anchors>
+                    {{ content | safe }}
+                </heading-anchors>
+            </main>
+        </div>
 
 		<footer>
 			<p>

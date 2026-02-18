@@ -57,7 +57,7 @@ html {
 	overflow-y: scroll;
 }
 body {
-	max-width: 40em;
+	max-width: none;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -294,5 +294,108 @@ header {
 }
 .post-metadata time {
 	margin-right: 1em;
+}
+
+/* Layout with TOC */
+.layout-with-toc {
+	display: flex;
+	max-width: 1200px;
+	margin: 0 auto;
+	gap: 2rem;
+}
+
+/* TOC Sidebar */
+.toc-sidebar {
+	flex: 0 0 250px;
+	position: sticky;
+	top: 2rem;
+	height: fit-content;
+	max-height: calc(100vh - 4rem);
+	overflow-y: auto;
+	padding: 1rem;
+}
+
+.toc-sidebar .toc {
+	border: 1px solid var(--color-gray-20);
+	border-radius: 6px;
+	padding: 1rem;
+	background-color: var(--background-color);
+}
+
+.toc strong {
+	font-size: 0.9rem;
+	color: var(--text-color);
+	display: block;
+	margin-bottom: 0.5rem;
+	border-bottom: 1px solid var(--color-gray-20);
+	padding-bottom: 0.5rem;
+}
+
+.toc ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.toc li {
+	margin: 0;
+	line-height: 1.4;
+}
+
+.toc a {
+	display: block;
+	padding: 0.25rem 0;
+	text-decoration: none;
+	font-size: 0.85rem;
+	color: var(--text-color-link);
+	border-radius: 3px;
+	transition: all 0.2s ease;
+}
+
+.toc a:hover {
+	background-color: var(--color-gray-20);
+	padding-left: 0.5rem;
+}
+
+.toc-level-2 {
+	margin-left: 0;
+}
+
+.toc-level-3 {
+	margin-left: 1rem;
+}
+
+.toc-level-3 a {
+	font-size: 0.8rem;
+	color: var(--color-gray-50);
+}
+
+/* Main content adjustments */
+.layout-with-toc main {
+	flex: 1;
+	min-width: 0;
+	max-width: 40em;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.layout-with-toc {
+		flex-direction: column;
+		max-width: 40em;
+		margin: 0 auto;
+	}
+	
+	.toc-sidebar {
+		flex: none;
+		position: static;
+		order: -1;
+		margin-bottom: 1rem;
+	}
+	
+	.toc-sidebar .toc {
+		border: none;
+		padding: 0.5rem;
+		background: transparent;
+	}
 }
 
