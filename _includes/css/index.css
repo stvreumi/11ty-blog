@@ -430,3 +430,40 @@ header {
 		background: transparent;
 	}
 }
+
+/* Print styles */
+@media print {
+
+	html,
+	body {
+		background-color: #ffffff !important;
+		color: #000000 !important;
+	}
+
+	/* Hide navigation, TOC, and other non-essential elements */
+	header,
+	.toc-sidebar,
+	.nav,
+	#skip-link,
+	footer {
+		display: none !important;
+	}
+
+	/* Ensure main content takes full width */
+	.layout-with-toc {
+		display: block;
+		max-width: 100%;
+		margin: 0;
+	}
+
+	.layout-with-toc main {
+		max-width: 100%;
+		flex: none;
+	}
+
+	/* Improve link readability */
+	a {
+		text-decoration: underline;
+		color: #000000 !important;
+	}
+}
