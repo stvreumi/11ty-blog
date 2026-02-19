@@ -445,6 +445,7 @@ header {
 	.toc-sidebar,
 	.nav,
 	#skip-link,
+	.no-print,
 	footer {
 		display: none !important;
 	}

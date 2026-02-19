@@ -4,12 +4,13 @@ const eleventyNavigation = {
 	order: 1
 };
 ---
-# 鍾智吉 (Chih-Chi Chung)
+# 鍾智吉 (Chih-Chi Chung) <button onclick="window.print()" class="no-print" style="cursor: pointer; background: none; border: none; font-size: 0.5em; vertical-align: middle;" title="Print Resume">🖨️</button>
 
 <!-- 📞 0929-939-072  -->
 📧 [stvreumi@gmail.com](mailto:stvreumi@gmail.com)  
-🌐 [GitHub: stvreumi](https://github.com/stvreumi)
-📄 [PDF Resume](https://r2.public.chcchung.cc/2026Resume.pdf)
+🌐 [GitHub: stvreumi](https://github.com/stvreumi)  
+📄 [PDF Resume](https://r2.public.chcchung.cc/2026Resume.pdf)  
+
 
 ---
 
