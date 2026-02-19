@@ -9,6 +9,7 @@ const eleventyNavigation = {
 <!-- 📞 0929-939-072  -->
 📧 [stvreumi@gmail.com](mailto:stvreumi@gmail.com)  
 🌐 [GitHub: stvreumi](https://github.com/stvreumi)
+📄 [PDF Resume](https://r2.public.chcchung.cc/2026Resume.pdf)
 
 ---
 
@@ -48,8 +49,8 @@ Passionate about improving system reliability and developer experience, and alwa
 
 ---
 
-### **CAMPUS Platform (Inmaster) — Project Lead & Backend Developer**  
-*Sept 2019 – Jan 2023 | Hsinchu, Taiwan*
+### **CAMPUS Platform — Project Lead & Backend Developer**  
+*2019 – 2023 | Hsinchu, Taiwan*
 
 * Led backend development for a campus crowdsourcing app built with Node.js and Apollo GraphQL.
 * Deployed using GCP Cloud Run; integrated Firebase for authentication and data storage.
@@ -70,8 +71,8 @@ Passionate about improving system reliability and developer experience, and alwa
 ## Skills
 
 * 👨‍💻 Programming, Development
-  * Languages: Python, JavaScript (Node.js, React), Java
-  * Web Frameworks: Spring Boot, Apollo GraphQL
+  * Languages: Python, JavaScript, Java
+  * Web Frameworks: Spring Boot, React, Apollo GraphQL
 
 
 * ⚙️ DevOps, Infrastructure
